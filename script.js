@@ -147,7 +147,7 @@ function addHiddenCard() {
     let cardDiv = document.createElement("div");
     cardDiv.setAttribute("id", "hidden-card");
     cardDiv.setAttribute("class", "card");
-    cardDiv.style.backgroundColor = "cornflowerblue";
+    cardDiv.style.backgroundColor = "gold";
 
     document.getElementById("dealer-area").appendChild(cardDiv);
 }
@@ -332,32 +332,63 @@ function clearBoard() {
 // Once you get rest of the rest of the assignment completed, work on making this function
 // calculate the best hand total between A = 1 and A = 11. Hint: there can only be one high ace in a hand
 function getHandTotal(hand) {
-
+    let sum = 0;
+    for(let i = 0; i < hand.length; i++) {
+        let cur = hand[i].charAt(0);
+        let num = 0;
+        if(cur == "T") {
+            num = 10;
+        } else if (cur == "J") {
+            num = 10;
+        } else if (cur == "Q") {
+            num = 10;
+        } else if (cur == "K") {
+            num = 10;
+        } else if (cur == "A") {
+            num = 1;
+        } else {
+            num = parseInt(cur);
+        }
+        sum += num;
+    }
+    return(sum);
 }
 
 // Adds a card to the player's hand array and updates UI with the card
 // TODO: Call this function from Hit button click
 // TODO: Implement this function
 function playerHit() {
-
+    let card = getCard();
+    playerHand.push(card);
+    addPlayerCard(card);
+    checkPlayer21OrBust();
 }
 
 // Adds a card to the dealer's hand array and updates UI with the card
 // TODO: Implement this function
 function dealerHit() {
-
+    let card = getCard();
+    dealerHand.push(card);
+    addDealerCard(card);
+    checkDealer21OrBust();
 }
 
 // Hides hit and stay buttons during dealer's turn
 // Called from dealerTurn()
 // TODO: Implement this function
 function hidePlayerControls() {
-    
+    let hitButton = document.getElementById("hit-button");
+    let stayButton = document.getElementById("stay-button");
+    hitButton.style.visibility = "hidden";
+    stayButton.style.visibility = "hidden";
 }
 
 // Shows hit and stay buttons
 // Called from deal()
-// TODO: Implement this function
+// TODO: Implement this function b
 function showPlayerControls() {
-    
+    let hitButton = document.getElementById("hit-button");
+    let stayButton = document.getElementById("stay-button");
+    hitButton.style.visibility = "visible"
+    stayButton.style.visibility = "visible";
 }
